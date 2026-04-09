@@ -14,7 +14,7 @@ int main()
     int num = 0;
     cin >> num;
 
-    int count = 0;
+    int count = num;
 
     for (int i = 0; i < num; i++)
     {
@@ -23,24 +23,16 @@ int main()
 
         int length = strlen(str);
 
-        int flag = 1;
         int alph[26] = {0};
 
         for (int j = 0; j < length; j++)
         {
-            if (j > 0 && str[j] != str[j - 1])
+            if (j > 0 && str[j] != str[j - 1] && alph[str[j] - 'a'] == 1)
             {
-                if (alph[str[j] - 'a'] == 1)
-                {
-                    flag = 0;
-                    break;
-                }
+                count--;
+                break;
             }
             alph[str[j] - 'a'] = 1;
-        }
-        if (flag == 1)
-        {
-            count++;
         }
     }
 
