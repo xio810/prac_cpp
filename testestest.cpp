@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cstring> //strlen사용하려면
 
 using namespace std; // std:: 생략 가능하게 해줌
 
@@ -8,49 +9,45 @@ int main()
     // 입출력 속도 최적화 (알고리즘 문제 풀 때 필수!)
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    cout << "입력 ->";
+    cout << "ʕっ.ᴥ.ʔっ ";
 
-    while (1)
+    int num = 0;
+    cin >> num;
+
+    int count = 0;
+
+    for (int i = 0; i < num; i++)
     {
-        int num;
-        cin >> num;
+        char str[101];
+        cin >> str;
 
-        if (num == -1)
+        int length = strlen(str);
+
+        int flag = 1;
+        int alph[26] = {0};
+
+        for (int j = 0; j < length; j++)
         {
-            break;
-        }
-
-        vector<int> arr;
-        int sum = 0;
-
-        for (int i = 1; i < num; i++)
-        {
-            if (num % i == 0)
+            if (j > 0 && str[j] != str[j - 1])
             {
-                arr.push_back(i);
-                sum += i;
+                if (alph[str[j] - 'a'] == 1)
+                {
+                    flag = 0;
+                    break;
+                }
             }
+            alph[str[j] - 'a'] = 1;
         }
-
-        if (num == sum)
+        if (flag == 1)
         {
-            // printf("%d = %d", num, arr[0]);
-            cout << num << " = " << arr[0];
-
-            for (int i = 1; i < arr.size(); i++)
-            {
-                // printf(" + %d", arr[i]);
-                cout << " + " << arr[i];
-            }
-            printf("\n");
-        }
-        else
-        {
-            cout << num << " is not perfect." << endl;
+            count++;
         }
     }
 
+    cout << count << endl;
+
     // cout << "입력한 숫자는 " << num << "입니다." << endl;
+    // cin >> num;
 
     return 0;
 }
