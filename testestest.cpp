@@ -11,32 +11,51 @@ int main()
     cin.tie(NULL);
     cout << "ʕっ.ᴥ.ʔっ ";
 
-    int num = 0;
-    cin >> num;
+    char str[101];
+    cin >> str;
 
-    int count = num;
+    int length = strlen(str);
 
-    for (int i = 0; i < num; i++)
+    int letter = length;
+
+    for (int i = 0; i < length; i++)
     {
-        char str[101];
-        cin >> str;
-
-        int length = strlen(str);
-
-        int alph[26] = {0};
-
-        for (int j = 0; j < length; j++)
+        if (str[i] == 'c')
         {
-            if (j > 0 && str[j] != str[j - 1] && alph[str[j] - 'a'] == 1)
+            if (str[i + 1] == '-' || str[i + 1] == '=')
             {
-                count--;
-                break;
+                letter--;
             }
-            alph[str[j] - 'a'] = 1;
+        }
+        else if (str[i] == 'd')
+        {
+            if (str[i + 1] == 'z' && str[i + 2] == '=')
+            {
+                letter -= 2;
+                i++;
+            }
+            else if (str[i + 1] == '-')
+            {
+                letter--;
+            }
+        }
+        else if (str[i] == 'n' || str[i] == 'l')
+        {
+            if (str[i + 1] == 'j')
+            {
+                letter--;
+            }
+        }
+        else if (str[i] == 's' || str[i] == 'z')
+        {
+            if (str[i + 1] == '=')
+            {
+                letter--;
+            }
         }
     }
 
-    cout << count << endl;
+    cout << letter << endl;
 
     // cout << "입력한 숫자는 " << num << "입니다." << endl;
     // cin >> num;
