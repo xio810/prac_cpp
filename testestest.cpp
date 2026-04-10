@@ -11,51 +11,90 @@ int main()
     cin.tie(NULL);
     cout << "ʕっ.ᴥ.ʔっ ";
 
-    char str[101];
-    cin >> str;
+    char subject[51]; // 과목명 programming
+    double score = 0; // 학점 3.0
+    char grade[3];    // 등급 A-
 
-    int length = strlen(str);
+    double score_mul_grade = 0; // 학점*등급별점수
+    double score_sum_grade = 0; //(학점 * 등급점수)의합
+    double total_score = 0;     // 학점의총합
+    double result = 0;          // 전공평점은 전공과목별 (학점 × 과목평점)의 합을 학점의 총합으로 나눈 값이다.
 
-    int letter = length;
-
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < 20; i++)
     {
-        if (str[i] == 'c')
-        {
-            if (str[i + 1] == '-' || str[i + 1] == '=')
-            {
-                letter--;
-            }
-        }
-        else if (str[i] == 'd')
-        {
-            if (str[i + 1] == 'z' && str[i + 2] == '=')
-            {
-                letter -= 2;
-                i++;
-            }
-            else if (str[i + 1] == '-')
-            {
-                letter--;
-            }
-        }
-        else if (str[i] == 'n' || str[i] == 'l')
-        {
-            if (str[i + 1] == 'j')
-            {
-                letter--;
-            }
-        }
-        else if (str[i] == 's' || str[i] == 'z')
-        {
-            if (str[i + 1] == '=')
-            {
-                letter--;
-            }
-        }
-    }
+        double grade_scr = 0;
 
-    cout << letter << endl;
+        scanf("%s %lf %s", subject, &score, grade);
+
+        if (grade[0] == 'P')
+        {
+            continue;
+        }
+
+        // 여기서부터 등급별 점수 나누기
+        if (grade[0] == 'A')
+        {
+            if (grade[1] == '+')
+            {
+                grade_scr = 4.5;
+            }
+            else if (grade[1] == '0')
+            {
+                grade_scr = 4.0;
+            }
+        }
+        else if (grade[0] == 'B')
+        {
+            if (grade[1] == '+')
+            {
+                grade_scr = 3.5;
+            }
+            else if (grade[1] == '0')
+            {
+                grade_scr = 3.0;
+            }
+        }
+        else if (grade[0] == 'C')
+        {
+            if (grade[1] == '+')
+            {
+                grade_scr = 2.5;
+            }
+            else if (grade[1] == '0')
+            {
+                grade_scr = 2.0;
+            }
+        }
+        else if (grade[0] == 'D')
+        {
+            if (grade[1] == '+')
+            {
+                grade_scr = 1.5;
+            }
+            else if (grade[1] == '0')
+            {
+                grade_scr = 1.0;
+            }
+        }
+        else if (grade[0] == 'F')
+        {
+            grade_scr = 0.0;
+        }
+
+        total_score += score;
+        score_mul_grade = score * grade_scr;                 // 학점 * 등급점수
+        score_sum_grade = score_sum_grade + score_mul_grade; //(학점 * 등급점수)의 합
+
+    } // for끝
+
+    result = score_sum_grade / total_score;
+    /*
+    printf("학점의총합:%lf\n", total_score);
+    printf("학점*등급점수%lf\n", score_mul_grade);
+    printf("(학점 * 등급점수)의 합%lf\n", score_sum_grade);
+    */
+
+    cout << result << endl;
 
     // cout << "입력한 숫자는 " << num << "입니다." << endl;
     // cin >> num;
