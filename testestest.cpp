@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <cstring> //strlen사용하려면
+#include <cstring>   //strlen 사용하려면
+#include <algorithm> //reverse 사용하려면
 
 using namespace std; // std:: 생략 가능하게 해줌
 
@@ -12,31 +13,41 @@ int main()
 
     cout << "ʕっ.ᴥ.ʔっ ";
 
-    char str[11]; // ZZZZZ
-    int jin;      // 진법
+    int num, jin;
+    cin >> num >> jin;
 
-    cin >> str >> jin;
+    char str[100];
+    int i = 0;
 
-    int length = strlen(str);
+    int mox = 0; // 몫
+    int nam = 0; // 나머지
 
-    long long result = 0;
-    int num;
-    int squared = 1; // 제곱
-
-    for (int i = length - 1; i >= 0; i--)
+    while (num > 0)
     {
-        // cout << i << endl;
+        mox = num / jin;
+        nam = num % jin; // 나머지
 
-        if ('A' <= str[i] && str[i] <= 'Z')
+        if (nam < 10)
         {
-            num = str[i] - 'A' + 10; // Z 는 35
+            str[i] = nam + '0';
+        }
+        else
+        {
+
+            str[i] = nam + 'A' - 10;
         }
 
-        result = result + (num * squared); // (35 * 1)
-        squared = jin * squared;
-    }
+        i++;
 
-    cout << result << endl;
+        num = mox;
+    }
+    str[i] = '\0';
+
+    // 확인용 출력
+    string s = str;
+    reverse(s.begin(), s.end());
+    cout << s << endl;
+
     // cout << "입력한 숫자는 " << num << "입니다." << endl;
     // cin >> num;
 
