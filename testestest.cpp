@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <cstring>   //strlen 사용하려면
-#include <algorithm> //reverse 사용하려면
+#include <algorithm> //reverse,max함수 사용하려면
+#include <cmath>     //abs함수. 절대값 구할때
 
 using namespace std; // std:: 생략 가능하게 해줌
 
@@ -11,45 +12,36 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    cout << "ʕっ.ᴥ.ʔっ ";
+    cout << "ʕっ.ᴥ.ʔっ" << endl;
 
-    int num, jin;
-    cin >> num >> jin;
+    string myString = "AAAAaaaa";
+    string pat = "a";
+    string answer;
 
-    char str[100];
-    int i = 0;
+    int length = myString.length() - pat.length(); // 5
 
-    int mox = 0; // 몫
-    int nam = 0; // 나머지
-
-    while (num > 0)
+    for (int i = length; i >= 0; i--)
     {
-        mox = num / jin;
-        nam = num % jin; // 나머지
+        bool same = true;
 
-        if (nam < 10)
+        for (int j = 0; j < pat.length(); j++)
         {
-            str[i] = nam + '0';
+            if (myString[i + j] != pat[j])
+            {
+                same = false;
+                break;
+            }
         }
-        else
+        if (same)
         {
-
-            str[i] = nam + 'A' - 10;
+            answer = myString.substr(0, i + pat.length());
+            break;
         }
-
-        i++;
-
-        num = mox;
     }
-    str[i] = '\0';
 
-    // 확인용 출력
-    string s = str;
-    reverse(s.begin(), s.end());
-    cout << s << endl;
+    cout << answer << endl;
 
-    // cout << "입력한 숫자는 " << num << "입니다." << endl;
-    // cin >> num;
-
+    //  vector<vector<int>> arr1(n, vector<int>(m));
+    //   cin >> num;
     return 0;
 }
