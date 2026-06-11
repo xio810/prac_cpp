@@ -12,34 +12,45 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    cout << "ʕっ.ᴥ.ʔっ" << endl;
+    cout << "ʕっ.ᴥ.ʔっ🎉" << endl;
 
-    string myString = "AAAAaaaa";
-    string pat = "a";
-    string answer;
+    vector<string> strArr = {"there", "aread", "no", "a", "ds"};
+    string ad = "ad";
+    vector<string> answer;
 
-    int length = myString.length() - pat.length(); // 5
-
-    for (int i = length; i >= 0; i--)
+    for (int i = 0; i < strArr.size(); i++)
     {
-        bool same = true;
+        string str = strArr[i];
+        bool hasAd = false; // 기본적으로 str이 ad가 없다고 가정
 
-        for (int j = 0; j < pat.length(); j++)
+        for (int j = 0; j < str.length(); j++)
         {
-            if (myString[i + j] != pat[j])
+            bool same = true;
+
+            for (int k = 0; k < ad.length(); k++)
             {
-                same = false;
+                if (str[j + k] != ad[k])
+                {
+                    same = false;
+                    break;
+                }
+            }
+            if (same)
+            {
+                hasAd = true; // 단어와 ad가 같다면 str을 true로
                 break;
             }
         }
-        if (same)
+        if (hasAd == false) // str에 ad가 없는 애들만
         {
-            answer = myString.substr(0, i + pat.length());
-            break;
+            answer.push_back(str);
         }
     }
 
-    cout << answer << endl;
+    for (int i = 0; i < answer.size(); i++)
+    {
+        cout << answer[i] << endl;
+    }
 
     //  vector<vector<int>> arr1(n, vector<int>(m));
     //   cin >> num;
