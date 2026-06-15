@@ -14,42 +14,34 @@ int main()
 
     cout << "ʕっ.ᴥ.ʔっ🎉" << endl;
 
-    vector<string> strArr = {"there", "aread", "no", "a", "ds"};
-    string ad = "ad";
+    string my_string = "s  o";
     vector<string> answer;
 
-    for (int i = 0; i < strArr.size(); i++)
+    string word = "";
+    for (int i = 0; i < my_string.length(); i++)
     {
-        string str = strArr[i];
-        bool hasAd = false; // 기본적으로 str이 ad가 없다고 가정
-
-        for (int j = 0; j < str.length(); j++)
+        if (my_string[i] != ' ') // 빈칸아닐때
         {
-            bool same = true;
-
-            for (int k = 0; k < ad.length(); k++)
+            word += my_string[i];
+        }
+        else if (my_string[i] == ' ') // 빈칸일때
+        {
+            if (word != "")
             {
-                if (str[j + k] != ad[k])
-                {
-                    same = false;
-                    break;
-                }
-            }
-            if (same)
-            {
-                hasAd = true; // 단어와 ad가 같다면 str을 true로
-                break;
+                answer.push_back(word);
+                word = "";
             }
         }
-        if (hasAd == false) // str에 ad가 없는 애들만
-        {
-            answer.push_back(str);
-        }
+    }
+    if (word != "")
+    {
+        answer.push_back(word);
+        word = "";
     }
 
     for (int i = 0; i < answer.size(); i++)
     {
-        cout << answer[i] << endl;
+        cout << answer[i] << " / ";
     }
 
     //  vector<vector<int>> arr1(n, vector<int>(m));
